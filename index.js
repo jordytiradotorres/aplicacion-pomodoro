@@ -9,7 +9,7 @@ const STATES = {
     PAUSED: 'paused'
 }
 
-const WORKING_TIME_LENGTH_IN_MINUTES = 25;
+const WORKING_TIME_LENGTH_IN_MINUTES = 1;
 const RESTING_TIME_LENGTH_IN_MINUTES = 5;
 
 let app = new Vue({
@@ -45,6 +45,12 @@ let app = new Vue({
             this.interval = setInterval(this._tick, 1000)
         },
         _tick () {
+            // Actualizar el timestamp que se utiliza en la imagen src
+            if (this.second % 10 === 0) {
+                // .getTime(), devuelve el valor numérico correspondiente a la hora para la fecha especificada según la hora universal.
+                this.timestamp = new Date().getTime()
+            }
+
             // si el segundo no es 0, decrementar en uno
             if (this.second !== 0) {
                 this.second--
